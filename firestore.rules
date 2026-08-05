@@ -1,0 +1,18 @@
+rules_version = '2';
+
+// This app has no login screen — it's meant for a small internal team who
+// share the deployed link. The rule below allows anyone loading the
+// deployed site (i.e. anyone using your Firebase config) to read and write
+// every worksheet. That's fine for a private team tool, but do NOT treat
+// the deployed URL as public-safe: don't put anything in a worksheet you
+// wouldn't want a stranger who finds the link to see or edit. If you need
+// real access control later, add Firebase Authentication and tighten this
+// rule (e.g. `allow read, write: if request.auth != null;`).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /worksheets/{worksheetId} {
+      allow read, write: if true;
+    }
+  }
+}
