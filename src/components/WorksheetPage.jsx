@@ -114,7 +114,7 @@ export default function WorksheetPage({
               : <div className="txt">{initial.bibleText}</div>}
           </div>
 
-          <div className={`block ${isYoung ? 'grow' : ''}`}>
+          <div className="block grow">
             <div className="block-title">
               <MusicIcon stroke="currentColor" />Song —{' '}
               {editable
@@ -136,6 +136,10 @@ export default function WorksheetPage({
             </div>
           </div>
 
+        </div>
+
+        {/* -------- RIGHT COLUMN -------- */}
+        <div className="col">
           {!isYoung && (
             <div className="block gold" style={{ display: 'flex', flexDirection: 'column', flex: 1.4, minHeight: 0 }}>
               <div className="block-title"><SearchIcon stroke="currentColor" />Wordsearch</div>
@@ -153,10 +157,7 @@ export default function WorksheetPage({
               <div className="ws-words">{wsState?.placed?.join('   •   ')}</div>
             </div>
           )}
-        </div>
 
-        {/* -------- RIGHT COLUMN -------- */}
-        <div className="col">
           {isYoung && (
             <div className="block coral" style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
               <div className="block-title"><PaletteIcon stroke="currentColor" />Activity — Color the picture</div>
