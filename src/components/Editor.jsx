@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import WorksheetPage from './WorksheetPage'
-import { buildWordsearch, parseWords } from '../utils/wordsearch'
+import { buildWordsearch, parseWords, serializeWsState } from '../utils/wordsearch'
 import { defaultDoc } from '../data/defaultDoc'
 
 const FIELD_KEYS = [
@@ -86,7 +86,7 @@ export default function Editor({ editState, onSave, status }) {
           homeworkB1: collectField(refs, 'homeworkB1'),
           homeworkB2: collectField(refs, 'homeworkB2'),
           wsWords: olderWsWords,
-          wsState: olderWsState,
+          wsState: serializeWsState(olderWsState),
         }
     onSave(age, payload, editingId[age])
   }

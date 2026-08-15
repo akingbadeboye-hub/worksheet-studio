@@ -54,3 +54,27 @@ export function buildWordsearch(words, wrapW, wrapH) {
 
   return { rows, cols, grid, placed }
 }
+
+// Firestore does not support arrays-of-arrays ("nested arrays"), and our
+// wsState.grid is exactly that (an array of rows, each row an array of
+// letters). Flatten each row into a single string before saving, and
+// split it back into a letter array when loading.
+export function serializeWsState(wsState) {
+  if (!wsState || !wsState.grid) return null
+  return {
+    rows: wsState.rows,
+    cols: wsState.cols,
+    placed: wsState.placed,
+    gridRows: wsState.grid.map(row => row.join('')),
+  }
+}
+
+export function deserializeWsState(data) {
+  if (!data || !data.gridRows) return null
+  return {
+    rows: data.rows,
+    cols: data.cols,
+    placed: data.placed || [],
+    grid: data.gridRows.map(rowStr => rowStr.split('')),
+  }
+}

@@ -1,3 +1,5 @@
+import { deserializeWsState } from './wordsearch'
+
 // Fills in any missing fields on a Firestore worksheet document with safe
 // defaults, so the editor/preview components always have every key they
 // expect regardless of which fields happen to be set on a given doc.
@@ -22,6 +24,6 @@ export function normalizeDoc(data) {
     homeworkB1: data.homeworkB1 || '',
     homeworkB2: data.homeworkB2 || '',
     wsWords: data.wsWords || '',
-    wsState: data.wsState || null,
+    wsState: deserializeWsState(data.wsState),
   }
 }
